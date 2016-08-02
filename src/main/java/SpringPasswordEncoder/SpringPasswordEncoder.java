@@ -16,11 +16,8 @@ public class SpringPasswordEncoder {
   @Option(name="-e", usage="Encode password into hash")
   private boolean encodeFlag;
 
-  @Option(name="-v", usage="Decode password into hash")
+  @Option(name="-v", usage="Verify hash")
   private boolean verifyFlag;
-
-  @Argument
-  private List<String> arguments = new ArrayList<String>();
 
   public static void main(String[] args) {
     new SpringPasswordEncoder().doMain(args);
@@ -32,9 +29,6 @@ public class SpringPasswordEncoder {
 
     try {
       parser.parseArgument(args);
-
-      if ( arguments.isEmpty() )
-        throw new CmdLineException(parser, "No options passed");
 
     } catch ( CmdLineException e ) {
       parser.printUsage(System.err);
@@ -54,6 +48,8 @@ public class SpringPasswordEncoder {
       System.out.println("Enter expected password : ");
       String pass = System.console().readLine();
       System.out.println(encoder.matches(pass, hash));
+    } else {
+      parser.printUsage(System.err);
     }
   }
 }
