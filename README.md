@@ -8,6 +8,8 @@ $ mvn package
 
 ## Usage
 
+```bash
 $ java -jar target/spring-password-0.1.0.jar
  -e : Encode password into hash (default: false)
- -v : Decode password into hash (default: true)
+ -v : Verify hash (default: false)
+ ```
